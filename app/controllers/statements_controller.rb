@@ -4,7 +4,7 @@ class StatementsController < ApplicationController
   # GET /statements
   # GET /statements.json
   def index
-    @statements = Statement.all
+    @statements = Statement.all.order(id: :desc)
   end
 
   # GET /statements/1
@@ -28,7 +28,7 @@ class StatementsController < ApplicationController
 
     respond_to do |format|
       if @statement.save
-        format.html { redirect_to @statement, notice: 'Statement was successfully created.' }
+        format.html { redirect_to statements_url, notice: 'Statement was successfully created.' }
         format.json { render action: 'show', status: :created, location: @statement }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class StatementsController < ApplicationController
   def update
     respond_to do |format|
       if @statement.update(statement_params)
-        format.html { redirect_to @statement, notice: 'Statement was successfully updated.' }
+        format.html { redirect_to statements_url, notice: 'Statement was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
